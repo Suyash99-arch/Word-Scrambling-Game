@@ -1,0 +1,48 @@
+import random
+
+word_list = [
+    "python", "computer", "engineering", "keyboard", "internet",
+    "programming", "developer", "algorithm", "database", "network"
+]
+
+def scramble_word(word):
+    word_letters = list(word)
+    random.shuffle(word_letters)
+    return ''.join(word_letters)
+
+def play_game():
+    score = 0
+    rounds = 3
+    
+    print("Welcome to the Word Scrambling Game!")
+    print("You have 3 attempts to guess each word.\n")
+    
+    for round_num in range(1, rounds + 1):
+        print(f"\n--- Round {round_num} ---")
+        
+        original_word = random.choice(word_list)
+        scrambled = scramble_word(original_word)
+        
+        print("Scrambled word:", scrambled)
+        
+        attempts = 3
+        
+        while attempts > 0:
+            guess = input("Enter your guess: ").lower()
+            
+            if guess == original_word:
+                print("Correct! You win this round!")
+                score += 1
+                break
+            else:
+                attempts -= 1
+                if attempts > 0:
+                    print(f"Wrong guess! Attempts left: {attempts}")
+                else:
+                    print("No attempts left!")
+                    print("The correct word was:", original_word)
+        
+    print("\nGame Over!")
+    print("Your final score:", score, "/", rounds)
+
+play_game()
